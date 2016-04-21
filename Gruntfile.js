@@ -159,7 +159,6 @@ module.exports = function (grunt) {
         },
         postcss: {
             options: {
-                map: true,
                 processors: [
                     require('autoprefixer')({browsers: ['last 2 versions', 'Firefox > 10', 'android 2.3', 'android 4', 'opera 12']}),
                     require('cssnano')() // minify the result

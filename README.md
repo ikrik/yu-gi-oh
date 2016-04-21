@@ -10,10 +10,10 @@
 
 ### Steps
 * Clone the git repository
-    `git clone git@github.com:KrikorTsakmatzian/yugiohApp.git yourFileName`
+    `git clone git@github.com:ikrik/yugiohApp.git yourDirectoryName`
 
 * cd to the cloned directory
-    `cd yourFileName`
+    `cd yourDirectoryName`
 
 * Install all npm dependencies and then install the bower dependencies.
     `npm install`
@@ -24,13 +24,13 @@
 
 ## Starting server for cross-domain XHR requests
 
-`cd yourFileName/public`
+`cd yourDirectoryName/public`
 
 `python -m SimpleHTTPServer 8000`
 
 ## Code directory structure
-    .
-    ├── app -has all the used app's files
+
+    ├── app - includes all the app's files
     │      ├── js
     │      │   ├── controllers
     │      │   ├── lib

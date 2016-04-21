@@ -1,0 +1,10 @@
+.idea
+bower_components
+node_modules
+out
+public/js
+public/stylesheets
+public/fonts
+public/views
+versions.map.json
+**/.DS_Store

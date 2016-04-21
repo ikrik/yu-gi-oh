@@ -1,0 +1,70 @@
+.md-whiteframe-z2 {
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+
+.site-sidenav, .site-sidenav.md-locked-open-add-active, .site-sidenav.md-locked-open {
+  .md-button {
+    margin:0;
+  }
+}
+
+.site-sidenav {
+  background: #2b2f3e;
+  color: #fff;
+  & > * {
+    min-width: 200px;
+  }
+  .nav-header {
+    text-align: center;
+    .site-logo {
+      text-align: center;
+      img {
+        width: 100px;
+      }
+      a:hover {
+        background: none;
+      }
+    }
+    .docs-logotype {
+      color: white;
+      text-align: center;
+      font-weight: 400;
+      font-size: 26px;
+    }
+  }
+  md-content {
+    background: transparent;
+    .sidebar-nav, .sidebar-nav ul {
+      list-style: none;
+      padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      li {
+        line-height: 40px;
+        border-bottom: 1px solid #fec564;
+        border-top: 1px solid #f9a248;
+        a {
+          display: block;
+          text-align:left;
+          text-decoration: none;
+          color: #ccc;
+          padding-right: 20px;
+          padding-left: 20px;
+          &:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.2);
+          }
+          &.active {
+            color: #fff;
+            background-color: #4c5264;
+            &:before {
+              color: @base-color;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+

@@ -1,0 +1,23 @@
+/* Roboto Fonts */
+.ubuntu-font(@type, @weight, @style) {
+  @font-face {
+    font-family: 'Ubuntu';
+    src: url('@{ubuntu-font-path}/ubuntu-@{type}-webfont.eot');
+    src: url('@{ubuntu-font-path}/ubuntu-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+    url('@{ubuntu-font-path}/ubuntu-@{type}-webfont.woff') format('woff'),
+    url('@{ubuntu-font-path}/ubuntu-@{type}-webfont.ttf') format('truetype'),
+    url('@{ubuntu-font-path}/ubuntu-@{type}-webfont.svg#ubuntu') format('svg');
+    font-weight: @weight;
+    font-style: @style;
+  }
+}
+.ubuntu-font-pair(@type, @weight) {
+  .ubuntu-font('@{type}', @weight, normal);
+  .ubuntu-font('@{type}Italic', @weight, italic);
+}
+
+.ubuntu-font-pair('Light', 300);
+.ubuntu-font-pair('Regular', 400);
+.ubuntu-font-pair('Medium', 500);
+.ubuntu-font-pair('Bold', 700);
+

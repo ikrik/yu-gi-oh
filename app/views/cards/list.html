@@ -1,0 +1,68 @@
+<md-toolbar class="md-whiteframe-glow-z1" ng-show="!showSearch">
+    <div class="md-toolbar-tools docs-toolbar-tools" tabIndex="-1">
+        <md-button class="md-icon-button" ng-click="openMenu()" hide-gt-sm aria-label="Toggle Menu">
+            <ng-md-icon icon="menu"></ng-md-icon>
+        </md-button>
+        <div layout="row" flex class="fill-height">
+            <h2 class="md-toolbar-item md-headline">
+                <span>CARDS</span>
+            </h2>
+            <span flex></span> <!-- use up the empty space -->
+            <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+                <ng-md-icon icon="search"></ng-md-icon>
+            </md-button>
+        </div>
+    </div>
+</md-toolbar>
+<md-toolbar class="md-whiteframe-glow-z1" ng-show="showSearch">
+    <div class="md-toolbar-tools">
+        <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+            <ng-md-icon icon="arrow_back"></ng-md-icon>
+        </md-button>
+        <md-input-container class="search" flex>
+            <label>&nbsp;</label>
+            <input type="text" ng-model="searchText" placeholder="search" focus-if="showSearch"/>
+        </md-input-container>
+        <md-button ng-click="searchText=''" aria-label="Back">
+            <ng-md-icon icon="clear"></ng-md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content  flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <ng-switch>
+            <div layout="row" layout-align="center center">
+                <md-card flex-gt-sm="90" flex-gt-md="80">
+                    <md-card-content ng-click="toggleSearch=false">
+                        <h2>Yu-Gi-Oh cards list</h2>
+                        <md-list>
+                            <md-item ng-repeat="item in cardList | filter:searchText">
+                                <md-item-content layout="row" layout-xs="column" layout-sm="column">
+                                    <div flex-gt-sm="none" flex class="list-image">
+                                        <img ng-src="http://yugiohprices.com/api/card_image/{{item.data.name}}" width="80px">
+                                    </div>
+                                    <div flex-gt-sm="auto" flex class="list-info">
+                                        <h3>{{item.data.name}}</h3>
+                                        <p>
+                                            {{item.data.card_type}}
+                                        </p>
+                                    </div>
+                                    <div flex-gt-sm="none" flex >
+                                        <md-button class="md-raised md-primary" ng-click="seeCard(item)">See more...</md-button>
+                                    </div>
+                                </md-item-content>
+                                <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
+                                <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                            </md-item>
+                            <md-divider></md-divider>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+
+        </ng-switch>
+
+    </ui-view>
+</md-content>
+</div>

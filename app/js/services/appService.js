@@ -1,15 +1,15 @@
 /*jslint browser */
 /*global angular */
-
+/*property
+ Accept, factory, get, getCard, id, module, one, setBaseUrl,
+ setDefaultHeaders, setRestangularFields, withConfig
+ */
 angular.module('yugiho.appServices', [
     'restangular',
-    'ui.alerts',
     'ngLodash'
 ]).factory('appService', ['Restangular',
-    function (Restangular) {
-    'use strict';
-    var cardEndPoint;
-
+        function (Restangular) {
+    "use strict";
     Restangular = Restangular.withConfig(function (RestangularConfigurer) {
         RestangularConfigurer.setDefaultHeaders({
             'Access-Control-Allow-Origin': '*',
@@ -28,6 +28,6 @@ angular.module('yugiho.appServices', [
         getCard: function (card) {
             return Restangular.one('card_data', card).get();
         }
-        
+
     };
 }]);

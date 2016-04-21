@@ -13,7 +13,6 @@
 
 angular.module('yugiho', [
     'ui.router',
-    'ui.alerts',
     'ngLodash',
     'ngAsync',
     'ngMaterial',

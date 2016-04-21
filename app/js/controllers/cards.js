@@ -3,7 +3,6 @@
 
 angular.module('yugiho.cards', [
     'ui.router',
-    'ui.alerts',
     'yugiho.appServices',
     'ngMdIcons',
     'ngLodash',

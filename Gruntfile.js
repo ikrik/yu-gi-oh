@@ -72,6 +72,7 @@ module.exports = function (grunt) {
                             'bower_components/lodash/lodash.js',
                             'bower_components/restangular/dist/restangular.js',
                             'bower_components/moment/moment.js',
+                            'bower_components/ng-focus-if/focusIf.js',
                             'public/js/scripts.min.js'
                         ],
                         dest: 'public/js/scripts.min.js'

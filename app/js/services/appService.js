@@ -7,8 +7,7 @@
 angular.module('yugiho.appServices', [
     'restangular',
     'ngLodash'
-]).factory('appService', ['Restangular',
-        function (Restangular) {
+]).factory('appService', ['Restangular', function (Restangular) {
     "use strict";
     Restangular = Restangular.withConfig(function (RestangularConfigurer) {
         RestangularConfigurer.setDefaultHeaders({
@@ -24,10 +23,8 @@ angular.module('yugiho.appServices', [
     });
 
     return {
-
         getCard: function (card) {
             return Restangular.one('card_data', card).get();
         }
-
     };
 }]);

@@ -1,15 +1,14 @@
-    /*jslint
+/*jslint
     browser
 */
 /*global angular */
 /*property
-    $on, alerts, assign, auth, authLevel, backdrop, backdropClass, close,
-    closeAlert, companyId, companyTitle, config, controller, extend,
-    getUserInfo, host, keyboard, loading, location, logout, module, open,
-    openMenu, otherwise, preferredLanguage, protocol, refresh, resolve, result,
-    run, setCompanyId, subscribe, templateUrl, then, token, urlTemplate,
-    useLoader, userName
-*/
+ $on, accentPalette, cardArray, cardList, catch, close, config, dataLoaded,
+ definePalette, extend, extendPalette, getCard, loading, log, map, module,
+ open, openMenu, otherwise, parallelLimit, primaryPalette, resolve, run,
+ theme, then
+ */
+
 
 angular.module('yugiho', [
     'ui.router',
@@ -23,7 +22,6 @@ angular.module('yugiho', [
 
     $urlRouterProvider
         .otherwise("/cards");
-    
 
     var palettePrimary = $mdThemingProvider.extendPalette('blue-grey', {
         '500': '#4c5264'
@@ -31,8 +29,8 @@ angular.module('yugiho', [
 
     var paletteAccent = $mdThemingProvider.extendPalette('grey', {
         '500': '#2b2f3e'
-    });   
-    
+    });
+
 
     $mdThemingProvider.definePalette('palettePrimary', palettePrimary);
     $mdThemingProvider.definePalette('paletteAccent', paletteAccent);
@@ -42,7 +40,7 @@ angular.module('yugiho', [
         .accentPalette('paletteAccent');
 
 }]).run([
-    '$rootScope','$mdSidenav', '$timeout', 'async', 'appService',
+    '$rootScope', '$mdSidenav', '$timeout', 'async', 'appService',
     function ($rootScope, $mdSidenav, $timeout, async, appService) {
         'use strict';
 
@@ -69,26 +67,24 @@ angular.module('yugiho', [
             'Void Seer'
         ];
 
-        var helpArray = $rootScope.cardArray.map(function(card) {
+        var helpArray = $rootScope.cardArray.map(function (card) {
             return function getCard(callback) {
                 appService.getCard(card)
                     .then(function (resultCard) {
                         return callback(null, resultCard);
                     })
-                    .catch(function (err) {
-                        console.log('error getting Card: ', err);
-                        callback(null, 'Error getting Card');
+                    .catch(function () {
+                        return callback(null, 'Error getting Card');
                     });
-            }
+            };
         });
 
         async.parallelLimit(helpArray, 5, function (err, results) {
-            console.log(results);
             $rootScope.cardList = results;
             $rootScope.dataLoaded = true;
         });
-        
-        $rootScope.$on('$stateChangeStart', function (ignore, toState, toParams) {
+
+        $rootScope.$on('$stateChangeStart', function (ignore, toState) {
             toState.resolve = angular.extend(toState.resolve || {});
             // close the main side nav if not locked
             $timeout(function () {

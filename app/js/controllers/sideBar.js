@@ -1,35 +1,46 @@
 /*jslint browser: true */
 /*global angular */
-angular.module('yugiho').factory('menu',['$rootScope',
-    function($rootScope) {
-        'use strict';
-        var self;
-        var menuArray = $rootScope.cardArray.map(function(card){
-            return {
-               name: card,
-               path: '#' + card,
-               title: card,
-               sref: 'cardDetails({cardId:"' + card + '"})',
-               type: 'link'
-            }
-        });
+/*property
+ cardArray, collection, controller, directive, factory, includes, isActive,
+ link, map, menu, module, name, openedSection, parent, path, scope, section,
+ sections, sref, templateUrl, title, toggle, toggleOpen,
+ toggleSelectSection, type
+ */
 
-        return self = {
-            sections: menuArray,
-            
-            toggleSelectSection: function(section) {
-                self.openedSection = (self.openedSection === section ? null : section);
-            }
+angular.module('yugiho').factory('menu', ['$rootScope', function ($rootScope) {
+    'use strict';
+    var self;
+    var menuArray = $rootScope.cardArray.map(function (card) {
+        return {
+            name: card,
+            path: '#' + card,
+            title: card,
+            sref: 'cardDetails({cardId:"' + card + '"})',
+            type: 'link'
         };
+    });
 
-    }])
-    .directive('menuLink', function() {
+    self = {
+        sections: menuArray,
+        toggleSelectSection: function (section) {
+            self.openedSection = (
+                self.openedSection === section
+                    ? null
+                    : section
+            );
+        }
+    };
+
+    return self;
+}])
+    .directive('menuLink', function () {
+        'use strict';
         return {
             scope: {
                 section: '='
             },
             templateUrl: 'views/menu.html',
-            link: function ($scope, $element, $state) {
+            link: function ($scope, $element) {
                 var controller = $element.parent().controller();
 
                 $scope.toggle = function () {
@@ -38,27 +49,20 @@ angular.module('yugiho').factory('menu',['$rootScope',
             }
         };
     })
-    .controller('SideBarController',
-        [
-            '$scope',
-            '$state',
-            'menu',
-            function ($scope, $state, menu) {
-                var vm = this;
-                
-                vm.toggleOpen = toggleOpen;
-                vm.menu = menu;
+    .controller('SideBarController', ['$scope', '$state', 'menu', function ($scope, $state, menu) {
+        'use strict';
+        var vm = this;
 
-                $scope.collection = menu.sections;
-                
-                function toggleOpen(section) {
-                    menu.toggleSelectSection(section);
-                }
-                
-                $scope.isActive = function (item) {
-                    return $state.includes(item.sref);
-                };
-                
-            }
-        ]
-    );
+        function toggleOpen(section) {
+            menu.toggleSelectSection(section);
+        }
+
+        vm.toggleOpen = toggleOpen;
+        vm.menu = menu;
+
+        $scope.collection = menu.sections;
+
+        $scope.isActive = function (item) {
+            return $state.includes(item.sref);
+        };
+    }]);
